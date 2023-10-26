@@ -1,6 +1,6 @@
 function FeaturedMatch() {
     return (
-        <div className="flex flex-col items-center bg-card p-6 mt-7">
+        <div className="flex flex-col items-center w-full">
             <div className="flex flex-row space-x-2 items-center mb-5">
                 <img src="public\images\premier.png" className="max-w-4 max-h-5" />
                 <p className="font-semibold">Premier League</p>
