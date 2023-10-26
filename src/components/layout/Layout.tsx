@@ -48,7 +48,7 @@ function Layout({ children }: { children: ReactNode }) {
                     <Button variant="secondary">Login</Button>
                 </div>
             </header>
-            <main className="p-4 h-full flex bg-black text-secondary-foreground">{children}</main>
+            <main className="p-10 h-full flex bg-black text-secondary-foreground">{children}</main>
         </div>
     );
 }
