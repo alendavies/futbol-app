@@ -1,3 +1,4 @@
+import { Liga } from "./Competition";
 import { Team } from "./Team";
 
 export type Match = {
@@ -5,4 +6,6 @@ export type Match = {
     visitor: Team;
     local_score: number;
     visitor_score: number;
+    league: Liga;
+    id: number;
 };
