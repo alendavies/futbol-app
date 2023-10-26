@@ -1,6 +1,7 @@
 import Card from "@/components/Card";
 import FeaturedMatch from "./FeaturedMatch";
 import League from "./League";
+import { competitions } from "@/data/Competition";
 
 function Home() {
     return (
@@ -9,7 +10,10 @@ function Home() {
                 <div className="w-full">
                     <p className="mb-2 ml-4 font-semibold">Ligas populares de Fútbol</p>
                     <Card>
-                        <League />
+                        <League league={competitions[0]} />
+                    </Card>
+                    <Card>
+                        <League league={competitions[1]} />
                     </Card>
                 </div>
                 <div className="w-full">
