@@ -6,7 +6,11 @@ type NavItemProps = {
 function NavItem(props: NavItemProps) {
     const { name } = props;
 
-    return <li className="hover:underline hover:underline-offset-8 hover:decoration-primary cursor-pointer">{name}</li>;
+    return (
+        <li className="hover:underline hover:underline-offset-8 hover:decoration-primary hover:decoration-2 cursor-pointer">
+            {name}
+        </li>
+    );
 }
 
 export default NavItem;

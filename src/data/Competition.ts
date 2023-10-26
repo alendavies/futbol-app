@@ -4,7 +4,7 @@ export const competitions: Competition[] = [
     {
         name: "Copa de la Liga Profesional",
         country: "Argentina",
-        icon: "argentina.png",
+        icon: "images/argentina.png",
         teams: [
             "Arsenal de Sarandí",
             "Colón",
@@ -19,7 +19,7 @@ export const competitions: Competition[] = [
     {
         name: "Champions League",
         country: "Europa",
-        icon: "champions.png",
+        icon: "images/champions.png",
         teams: [
             "Feyenoord",
             "Lazio",
