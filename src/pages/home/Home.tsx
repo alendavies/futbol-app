@@ -1,7 +1,8 @@
-import Card from "@/components/Card";
+import Card from "@/components/surfaces/Card";
 import FeaturedMatch from "./FeaturedMatch";
 import League from "./League";
 import { competitions } from "@/data/Competition";
+import CardContent from "@/components/surfaces/CardContent";
 
 function Home() {
     return (
@@ -9,16 +10,16 @@ function Home() {
             <div className="grid grid-cols-2 gap-4 w-full">
                 <div className="w-full">
                     <p className="mb-2 ml-4 font-semibold">Ligas populares de Fútbol</p>
-                    <Card>
+                    <div className="space-y-4">
                         <League league={competitions[0]} />
-                    </Card>
-                    <Card>
                         <League league={competitions[1]} />
-                    </Card>
+                    </div>
                 </div>
                 <div className="w-full">
                     <Card>
-                        <FeaturedMatch />
+                        <CardContent>
+                            <FeaturedMatch />
+                        </CardContent>
                     </Card>
                 </div>
             </div>

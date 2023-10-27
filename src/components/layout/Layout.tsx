@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 import NavItem from "./NavItem";
-import { Search, icons } from "lucide-react";
-import { Button, Input, TextField } from "../ui";
+import { Search } from "lucide-react";
+import { Button, Input } from "../ui";
 
 const navItems = [
     {
@@ -48,7 +48,7 @@ function Layout({ children }: { children: ReactNode }) {
                     <Button variant="secondary">Login</Button>
                 </div>
             </header>
-            <main className="p-10 h-full flex bg-black text-secondary-foreground">{children}</main>
+            <main className="p-10 h-full flex bg-black text-primary-foreground">{children}</main>
         </div>
     );
 }
