@@ -1,6 +1,7 @@
 import { axiosInstance } from "@/lib/axios";
+import { Competition } from "@/types/Competition";
 
-export type League = {
+export type LeagueDTO = {
     league: {
         id: number;
         name: string;
@@ -14,6 +15,14 @@ export type League = {
     };
 };
 
-export function getLeagues({ country }: { country: string }): Promise<League[]> {
-    return axiosInstance.get("/leagues").then((res) => res.data.response);
+export function getLeagues({ country }: { country: string }): Promise<Competition[]> {
+    return axiosInstance.get("/leagues").then((res) =>
+        res.data.response.map(
+            (league: LeagueDTO): Competition => ({
+                name: league.league.name,
+                country: league.country.name,
+                icon: league.league.logo
+            })
+        )
+    );
 }

@@ -8,5 +8,5 @@ export type Competition = {
     name: string;
     country: string;
     icon: string;
-    teams: Equipo[];
+    teams?: Equipo[];
 };
