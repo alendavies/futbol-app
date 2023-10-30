@@ -28,6 +28,7 @@
 /* export type Equipo = (typeof Equipos)[number]; */
 
 export type Team = {
+    id: number;
     name: string;
-    icon: string;
+    logo: string;
 };

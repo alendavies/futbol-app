@@ -1,5 +1,5 @@
 import Match from "@/components/Match";
-import { Competition } from "@/types/Competition";
+import { Competition } from "@/types/League";
 import { match } from "@/data/Match";
 import Card from "@/components/surfaces/Card";
 
