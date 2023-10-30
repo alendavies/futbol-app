@@ -1,4 +1,4 @@
-const Equipos = [
+/* const Equipos = [
     "Arsenal de Sarandí",
     "Colón",
     "Atlético Tucumán",
@@ -23,11 +23,11 @@ const Equipos = [
     "Antwerp",
     "Dortmund",
     "Newcastle"
-] as const;
+] as const; */
 
-export type Equipo = (typeof Equipos)[number];
+/* export type Equipo = (typeof Equipos)[number]; */
 
 export type Team = {
-    name: Equipo;
+    name: string;
     icon: string;
 };
