@@ -15,14 +15,22 @@ export type LeagueDTO = {
     };
 };
 
-export function getLeagues({ country }: { country: string }): Promise<Competition[]> {
-    return axiosInstance.get("/leagues").then((res) =>
-        res.data.response.map(
-            (league: LeagueDTO): Competition => ({
-                name: league.league.name,
-                country: league.country.name,
-                icon: league.league.logo
-            })
-        )
-    );
+type GetLeaguesParams = {
+    country: string;
+};
+
+export function getLeagues(params: GetLeaguesParams): Promise<Competition[]> {
+    return axiosInstance
+        .get("/leagues", {
+            params: params
+        })
+        .then((res) =>
+            res.data.response.map(
+                (league: LeagueDTO): Competition => ({
+                    name: league.league.name,
+                    country: league.country.name,
+                    icon: league.league.logo
+                })
+            )
+        );
 }

@@ -1,8 +1,9 @@
 import React from "react";
-import { League, getLeagues } from "./api";
+import { getLeagues } from "./api";
+import { Competition } from "./types/Competition";
 
 export default function App() {
-    const [leagues, setLeagues] = React.useState<League[]>();
+    const [leagues, setLeagues] = React.useState<Competition[]>();
 
     React.useEffect(() => {
         getLeagues({ country: "Argentina" }).then((res) => {
