@@ -1,5 +1,5 @@
 import { axiosInstance } from '@/lib/axios';
-import { LeagueDTO } from './dtos/league';
+import { LeagueDTO } from '../dtos/league';
 import { League } from '@/types/League';
 
 type GetLeaguesParams = {

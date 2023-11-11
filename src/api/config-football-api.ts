@@ -1,7 +1,7 @@
 import { axiosInstance } from '@/lib/axios';
 import { AxiosError, AxiosResponse } from 'axios';
-import { TeamDTO } from './team';
-import { GetTeamsParams } from '../teams';
+import { TeamDTO } from './dtos/team';
+import { GetTeamsParams } from './getters/teams';
 
 /**
  * Represents the response body of a football API request.

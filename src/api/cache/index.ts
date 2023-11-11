@@ -1,5 +1,5 @@
 import { TeamDTO } from '../dtos/team';
-import { db } from './config';
+import { db } from './config-db';
 
 export const CacheAPI = {
     getTeams: () =>
