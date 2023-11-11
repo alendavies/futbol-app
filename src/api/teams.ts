@@ -1,9 +1,9 @@
 import { axiosInstance } from '@/lib/axios';
 import { Team } from '@/types/Team';
-import { localDB } from './cache';
+import { CacheAPI } from './cache';
 import { TeamDTO } from './dtos/team';
 
-type GetTeamsParams = {
+export type GetTeamsParams = {
     league?: string;
     season: string;
 };
@@ -11,7 +11,7 @@ type GetTeamsParams = {
 export const getTeams = (params: GetTeamsParams) =>
     new Promise<Team[]>(async (resolve, reject) => {
         try {
-            const teams = await localDB.getTeams();
+            const teams = await CacheAPI.getTeams();
             teams && resolve(mapTeamsFromDTO(teams));
         } catch (err) {
             reject(err);

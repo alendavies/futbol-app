@@ -1,16 +1,11 @@
 import { TeamDTO } from '../dtos/team';
+import { GetTeamsParams } from '../teams';
 import { db } from './config';
 
-export const localDB = {
-    getTeams: () =>
+export const CacheAPI = {
+    getTeams: (params: GetTeamsParams) =>
         new Promise<TeamDTO[]>(async (resolve, reject) => {
-            try {
-                const teams = await db.teams.toArray();
-
-                resolve(teams);
-            } catch (err) {
-                reject(err);
-            }
+            db.teams.toArray().then(resolve).catch(reject);
         })
 
     // putTeams: () => new Promise(async (resolve, reject) => {
