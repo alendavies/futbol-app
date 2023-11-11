@@ -8,23 +8,30 @@ type GetTeamsParams = {
     season: string;
 };
 
-export const getTeams = (params: GetTeamsParams) =>
-    new Promise<Team[]>(async (resolve, reject) => {
-        try {
-            const teams = await localDB.getTeams();
-            teams && resolve(mapTeamsFromDTO(teams));
-        } catch (err) {
-            reject(err);
-        }
+export const getTeams = (params: GetTeamsParams): Promise<Team[]> =>
+    new Promise<Team[]>((resolve, reject) => {
+        const fetchData = async () => {
+            try {
+                const teams = await localDB.getTeams();
+                teams.length && resolve(mapTeamsFromDTO(teams));
+            } catch (err) {
+                console.error('Error fetching teams from localDB:', err);
+                reject(err);
+            }
 
-        try {
-            const teamsAPI = await axiosInstance.get('/teams', {
-                params: params
-            });
-            resolve(mapTeamsFromDTO(teamsAPI.data.response));
-        } catch (err) {
-            reject(err);
-        }
+            try {
+                const teamsAPI = await axiosInstance.get('/teams', {
+                    params: params
+                });
+                const teamMapped = mapTeamsFromDTO(teamsAPI.data.response);
+                resolve(teamMapped);
+            } catch (err) {
+                console.error('Error fetching teams from API:', err);
+                reject(err);
+            }
+        };
+
+        fetchData();
     });
 
 const mapTeamsFromDTO = (teams: TeamDTO[]): Team[] =>
