@@ -11,11 +11,11 @@ export const localDB = {
             } catch (err) {
                 reject(err);
             }
-        }),
-    
-    putTeams: () => new Promise(async (resolve, reject) => {
-        try {
-            
-        }
-    })
+        })
+
+    // putTeams: () => new Promise(async (resolve, reject) => {
+    //     try {
+
+    //     }
+    // })
 };
