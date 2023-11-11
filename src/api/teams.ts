@@ -23,6 +23,10 @@ export const getTeams = (params: GetTeamsParams): Promise<Team[]> =>
                 const teamsAPI = await axiosInstance.get('/teams', {
                     params: params
                 });
+                localDB.putTeams(teamsAPI.data.response).then(() => {
+                    localDB.getTeams().then(res => console.log('Teams from DB:', res));
+                });
+
                 const teamMapped = mapTeamsFromDTO(teamsAPI.data.response);
                 resolve(teamMapped);
             } catch (err) {

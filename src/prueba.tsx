@@ -19,7 +19,6 @@ export default function Prueba() {
             }); */
         getTeams({ league: '39', season: '2023' })
             .then(res => {
-                console.log('La respuesta es:', res);
                 setTeams(res);
             })
             .catch(error => {

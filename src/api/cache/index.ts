@@ -11,11 +11,16 @@ export const localDB = {
             } catch (err) {
                 reject(err);
             }
+        }),
+
+    putTeams: (teams: TeamDTO[]) =>
+        new Promise<void>(async (resolve, reject) => {
+            try {
+                await db.teams.bulkPut(teams);
+                resolve();
+            } catch (error) {
+                console.error('Error putting teams:', error);
+                reject(error);
+            }
         })
-
-    // putTeams: () => new Promise(async (resolve, reject) => {
-    //     try {
-
-    //     }
-    // })
 };
