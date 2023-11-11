@@ -5,7 +5,7 @@ import { getTeams } from './api/teams';
 import { Team } from './types/Team';
 
 export default function Prueba() {
-    const [leagues, setLeagues] = React.useState<League[]>();
+    // const [leagues, setLeagues] = React.useState<League[]>();
     const [teams, setTeams] = React.useState<Team[]>();
 
     React.useEffect(() => {
@@ -19,16 +19,15 @@ export default function Prueba() {
             }); */
         getTeams({ league: '39', season: '2023' })
             .then(res => {
-                console.log(res);
                 setTeams(res);
             })
             .catch(error => {
                 console.log('Límite de requests a la api', error.name, error.message, error.code);
             });
     }, []);
-    /* 
-    if (!leagues) return null;
-    if (!teams) return null; */
+
+    // if (!leagues) return null;
+    if (!teams) return null;
 
     return <div></div>;
 }

@@ -8,23 +8,32 @@ export type GetTeamsParams = {
     season: string;
 };
 
-export const getTeams = (params: GetTeamsParams) =>
-    new Promise<Team[]>(async (resolve, reject) => {
-        try {
-            const teams = await CacheAPI.getTeams();
-            teams && resolve(mapTeamsFromDTO(teams));
-        } catch (err) {
-            reject(err);
-        }
+export const getTeams = (params: GetTeamsParams): Promise<Team[]> =>
+    new Promise<Team[]>((resolve, reject) => {
+        const fetchData = async () => {
+            try {
+                const teams = await CacheAPI.getTeams();
+                if (teams.length) {
+                    console.log('Teams from CacheAPI:', teams);
+                    resolve(mapTeamsFromDTO(teams));
+                } else {
+                    const teamsAPI = await axiosInstance.get('/teams', {
+                        params: params
+                    });
 
-        try {
-            const teamsAPI = await axiosInstance.get('/teams', {
-                params: params
-            });
-            resolve(mapTeamsFromDTO(teamsAPI.data.response));
-        } catch (err) {
-            reject(err);
-        }
+                    CacheAPI.putTeams(teamsAPI.data.response);
+                    const teamMapped = mapTeamsFromDTO(teamsAPI.data.response);
+
+                    console.log('Teams from API:', teamMapped);
+                    resolve(teamMapped);
+                }
+            } catch (err) {
+                console.error('Error fetching teams:', err);
+                reject(err);
+            }
+        };
+
+        fetchData();
     });
 
 const mapTeamsFromDTO = (teams: TeamDTO[]): Team[] =>
