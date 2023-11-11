@@ -2,6 +2,7 @@ import { axiosInstance } from '@/lib/axios';
 import { Team } from '@/types/Team';
 import { CacheAPI } from './cache';
 import { TeamDTO } from './dtos/team';
+import { FootballAPI } from './dtos/football-api';
 
 export type GetTeamsParams = {
     league?: string;
@@ -12,20 +13,17 @@ export const getTeams = (params: GetTeamsParams): Promise<Team[]> =>
     new Promise<Team[]>((resolve, reject) => {
         const fetchData = async () => {
             try {
-                const teams = await CacheAPI.getTeams();
+                let teams = await CacheAPI.getTeams();
                 if (teams.length) {
                     console.log('Teams from CacheAPI:', teams);
                     resolve(mapTeamsFromDTO(teams));
                 } else {
-                    const teamsAPI = await axiosInstance.get('/teams', {
-                        params: params
-                    });
+                    teams = await FootballAPI.getTeams(params);
 
-                    CacheAPI.putTeams(teamsAPI.data.response);
-                    const teamMapped = mapTeamsFromDTO(teamsAPI.data.response);
+                    CacheAPI.putTeams(teams);
 
-                    console.log('Teams from API:', teamMapped);
-                    resolve(teamMapped);
+                    console.log('Teams from API:', teams);
+                    resolve(mapTeamsFromDTO(teams));
                 }
             } catch (err) {
                 console.error('Error fetching teams:', err);
