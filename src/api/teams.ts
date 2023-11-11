@@ -1,42 +1,37 @@
-import { axiosInstance } from "@/lib/axios";
-import { Team } from "@/types/Team";
-
-export type TeamsDTO = {
-    team: {
-        id: number;
-        name: string;
-        country: string;
-        founded: number;
-        national: boolean;
-        logo: string;
-    };
-    venue: {
-        id: number;
-        name: string;
-        address: string;
-        city: string;
-        capacity: number;
-        surface: string;
-        image: string;
-    };
-};
+import { axiosInstance } from '@/lib/axios';
+import { Team } from '@/types/Team';
+import { localDB } from './cache';
+import { TeamDTO } from './dtos/team';
 
 type GetTeamsParams = {
     league?: string;
     season: string;
 };
 
-export function getTeams(params: GetTeamsParams): Promise<Team[]> {
-    return axiosInstance
-        .get("/teams", {
-            params: params
+export const getTeams = (params: GetTeamsParams) =>
+    new Promise<Team[]>(async (resolve, reject) => {
+        try {
+            const teams = await localDB.getTeams();
+            teams && resolve(mapTeamsFromDTO(teams));
+        } catch (err) {
+            reject(err);
+        }
+
+        try {
+            const teamsAPI = await axiosInstance.get('/teams', {
+                params: params
+            });
+            resolve(mapTeamsFromDTO(teamsAPI.data.response));
+        } catch (err) {
+            reject(err);
+        }
+    });
+
+const mapTeamsFromDTO = (teams: TeamDTO[]): Team[] =>
+    teams.map(
+        (teams: TeamDTO): Team => ({
+            id: teams.team.id,
+            name: teams.team.name,
+            logo: teams.team.logo
         })
-        .then((res) =>
-            res.data.response.map(
-                (teams: TeamsDTO): Team => ({
-                    name: teams.team.name,
-                    icon: teams.team.logo
-                })
-            )
-        );
-}
+    );

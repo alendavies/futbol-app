@@ -1,32 +1,19 @@
-import { axiosInstance } from "@/lib/axios";
-import { Competition } from "@/types/League";
-
-export type LeagueDTO = {
-    league: {
-        id: number;
-        name: string;
-        type: "League" | "Cup";
-        logo: string;
-    };
-    country: {
-        name: string;
-        code: string;
-        flag: string;
-    };
-};
+import { axiosInstance } from '@/lib/axios';
+import { LeagueDTO } from './dtos/league';
+import { League } from '@/types/League';
 
 type GetLeaguesParams = {
     country: string;
 };
 
-export function getLeagues(params: GetLeaguesParams): Promise<Competition[]> {
+export function getLeagues(params: GetLeaguesParams): Promise<League[]> {
     return axiosInstance
-        .get("/leagues", {
+        .get('/leagues', {
             params: params
         })
-        .then((res) =>
+        .then(res =>
             res.data.response.map(
-                (league: LeagueDTO): Competition => ({
+                (league: LeagueDTO): League => ({
                     id: league.league.id,
                     name: league.league.name,
                     country: league.country.name,
