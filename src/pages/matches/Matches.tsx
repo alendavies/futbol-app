@@ -1,4 +1,4 @@
-import MatchFilter from "./MatchFilter";
+import MatchFilter from './MatchFilter';
 
 function Matches() {
     return (
