@@ -2,7 +2,7 @@ import MatchFilter from './MatchFilter';
 
 function Matches() {
     return (
-        <div>
+        <div className='border-b-[1px] border-secondary w-full'>
             <MatchFilter />
         </div>
     );
