@@ -1,25 +1,32 @@
-import { axiosInstance } from '@/lib/axios';
-import { LeagueDTO } from '../dtos/league';
 import { League } from '@/types/League';
+import { CacheAPI } from '../cache';
+import { FootballAPI } from '../config-football-api';
+import { Mappers } from '../mappers';
 
-type GetLeaguesParams = {
+export type GetLeaguesParams = {
     country: string;
 };
 
-export function getLeagues(params: GetLeaguesParams): Promise<League[]> {
-    return axiosInstance
-        .get('/leagues', {
-            params: params
-        })
-        .then(res =>
-            res.data.response.map(
-                (league: LeagueDTO): League => ({
-                    id: league.league.id,
-                    name: league.league.name,
-                    country: league.country.name,
-                    logo: league.league.logo,
-                    flag: league.country.flag
+export const getLeagues = (params: GetLeaguesParams): Promise<League[]> =>
+    new Promise<League[]>((resolve, reject) => {
+        const fetchData = async () => {
+            FootballAPI.getLeagues(params)
+                .then(leagues => {
+                    CacheAPI.putLeagues(leagues);
+                    console.log('Leagues from API:', leagues);
+                    resolve(Mappers.mapLeaguesFromDTO(leagues));
                 })
-            )
-        );
-}
+                .catch(() => {
+                    CacheAPI.getLeagues()
+                        .then(leagues => {
+                            console.log('Leagues from CacheAPI:', leagues);
+                            resolve(Mappers.mapLeaguesFromDTO(leagues));
+                        })
+                        .catch(err => {
+                            reject(err);
+                        });
+                });
+        };
+
+        fetchData();
+    });

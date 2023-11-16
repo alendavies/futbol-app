@@ -2,6 +2,10 @@ import { axiosInstance } from '@/lib/axios';
 import { AxiosError, AxiosResponse } from 'axios';
 import { TeamDTO } from './dtos/team';
 import { GetTeamsParams } from './getters/teams';
+import { LeagueDTO } from './dtos/league';
+import { GetLeaguesParams } from './getters/leagues';
+import { GetFixturesParams } from './getters/fixture';
+import { FixtureDTO } from './dtos/fixture';
 
 /**
  * Represents the response body of a football API request.
@@ -31,5 +35,15 @@ export const FootballAPI = {
         axiosInstance
             .get('/teams', { params })
             .then(getResponse<TeamDTO>)
+            .catch(getError),
+    getLeagues: (params: GetLeaguesParams) =>
+        axiosInstance
+            .get('/leagues', { params })
+            .then(getResponse<LeagueDTO>)
+            .catch(getError),
+    getFixtures: (params: GetFixturesParams) =>
+        axiosInstance
+            .get('/fixtures', { params })
+            .then(getResponse<FixtureDTO>)
             .catch(getError)
 };

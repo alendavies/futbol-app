@@ -27,10 +27,10 @@ function Carousel() {
                         Hoy
                     </Button>
                     <Button variant={'default'} size={'m'}>
-                        Hoy{' '}
+                        Hoy
                     </Button>
                     <Button variant={'default'} size={'m'}>
-                        Hoy{' '}
+                        Hoy
                     </Button>
                 </div>
             </div>

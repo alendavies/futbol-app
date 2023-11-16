@@ -1,6 +1,5 @@
 import { Team } from '@/types/Team';
 import { CacheAPI } from '../cache';
-import { TeamDTO } from '../dtos/team';
 import { FootballAPI } from '../config-football-api';
 import { Mappers } from '../mappers';
 
