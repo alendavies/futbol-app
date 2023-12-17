@@ -1,0 +1,1 @@
+Cache local para reflejar gets de la api y ahorrar llamadas. Acá se proveen métodos para setear y getear algunas cosas, reflejando el esquema correspondiente de la api, permitiendo interceptar gets así se guarda y se saca de la db local cuando está disponible.

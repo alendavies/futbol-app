@@ -1,4 +1,4 @@
-import { Competition } from "@/types/Competition";
+import { Competition } from "@/types/League";
 
 export const competitions: Competition[] = [
     {
