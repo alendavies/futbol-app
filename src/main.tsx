@@ -1,41 +1,41 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-import "./index.css";
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import { Home } from "./pages";
-import Layout from "./components/layout/Layout";
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import './index.css';
+import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import { Home, Matches } from './pages';
+import Layout from './components/layout/Layout';
 
 const routes = [
     {
-        path: "/futbol-app",
+        path: '/futbol-app',
         element: <Layout />,
         children: [
             {
-                path: "",
+                path: '',
                 element: <Home />
             },
             {
-                path: "matches",
-                element: <>matches</>
+                path: 'matches',
+                element: <Matches />
             },
             {
-                path: "matches/:matchId",
+                path: 'matches/:matchId',
                 element: <>some match</>
             },
             {
-                path: "competitions",
+                path: 'competitions',
                 element: <>competitions</>
             },
             {
-                path: "competitions/:competitionId",
+                path: 'competitions/:competitionId',
                 element: <>some competition1</>
             },
             {
-                path: "teams",
+                path: 'teams',
                 element: <>teams</>
             },
             {
-                path: "teams/:teamId",
+                path: 'teams/:teamId',
                 element: <>some team</>
             }
         ]
@@ -44,7 +44,7 @@ const routes = [
 
 const router = createBrowserRouter(routes);
 
-ReactDOM.createRoot(document.getElementById("root")!).render(
+ReactDOM.createRoot(document.getElementById('root')!).render(
     <React.StrictMode>
         <RouterProvider router={router} />
     </React.StrictMode>
